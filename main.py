@@ -1,5 +1,5 @@
 from pypdf import PdfReader
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import re
 
@@ -15,6 +15,20 @@ def convert_zuhr(time):
         return convert_to_24_hour(time)
     return time
 
+def final_third_start(time1, time2):
+    FMT = "%H:%M"
+    end = datetime.strptime(time2, FMT) + timedelta(days=1)
+    start = datetime.strptime(time1, FMT)
+    difference = end - start
+
+    start_of_ft = start + (difference * 2/3)
+
+    if start_of_ft.second > 0:
+        start_of_ft += timedelta(minutes=1)
+    
+
+    return str(start_of_ft.strftime("%H:%M"))
+ 
 data = {}
 
 for page in reader.pages:
@@ -44,6 +58,8 @@ for page in reader.pages:
             "maghrib": convert_to_24_hour(temp[10]),
             "isha": convert_to_24_hour(temp[12])
         }
+
+        data[date]["final_third"] = final_third_start(data[date]["maghrib"], data[date]["fajr"])
 
         if int(temp[1]) == 31:
             break
