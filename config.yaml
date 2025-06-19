@@ -1,0 +1,9 @@
+notifications:
+  type: adhan
+  times:
+    - fajr
+    - maghrib
+    - isha
+
+audio: 
+  volume: 20
