@@ -1,9 +1,27 @@
-notifications:
-  type: adhan
-  times:
-    - fajr
-    - maghrib
-    - isha
+audio:
+  volume: 30  
 
-audio: 
-  volume: 20
+notifications:
+  fajr:
+    enabled: true
+    type: adhan
+
+  dhuhr:
+    enabled: false
+    type: adhan
+
+  asr:
+    enabled: true
+    type: adhan
+
+  maghrib:
+    enabled: false
+    type: adhan
+
+  isha:
+    enabled: false
+    type: adhan
+
+  final_third:
+    enabled: false
+    type: adhan
